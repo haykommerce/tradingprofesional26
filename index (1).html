@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading Profesional 26 — El Manual Definitivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #F0D080;
+      --gold-dark: #8A6820;
+      --ink: #0A0A0E;
+      --ink-soft: #1A1A24;
+      --paper: #F7F4EE;
+      --paper-warm: #EDE8DD;
+      --muted: #6B6860;
+      --accent: #2A4080;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ink);
+      color: var(--paper);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(10,10,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding: 0.55rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 8rem 5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(42,64,128,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(201,168,76,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 0.35rem 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 0.3rem;
+      color: var(--paper);
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 1.2rem 0 2.5rem;
+      max-width: 420px;
+      font-weight: 300;
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-bottom: 2.8rem;
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; letter-spacing: 0.05em; }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      padding: 0.9rem 2.2rem;
+      border: none; cursor: pointer;
+      text-decoration: none; text-transform: uppercase;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--paper);
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(247,244,238,0.25);
+      cursor: pointer; text-decoration: none;
+      text-transform: uppercase; display: inline-block;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+
+    /* ── BOOK MOCKUP ── */
+    .hero-book { position: relative; display: flex; justify-content: center; align-items: center; }
+    .book-wrapper {
+      position: relative;
+      width: 280px;
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-16px) rotate(-2deg); }
+    }
+    .book-cover {
+      width: 280px; height: 380px;
+      background: linear-gradient(145deg, #1A2340 0%, #0D1625 60%, #0A0F1E 100%);
+      border: 1px solid rgba(201,168,76,0.3);
+      position: relative; overflow: hidden;
+      box-shadow: 20px 20px 60px rgba(0,0,0,0.7), -4px 0 0 rgba(201,168,76,0.15) inset;
+    }
+    .book-cover::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(201,168,76,0.03) 20px, rgba(201,168,76,0.03) 21px);
+    }
+    .book-spine { position: absolute; left: 0; top: 0; bottom: 0; width: 20px; background: rgba(201,168,76,0.1); border-right: 1px solid rgba(201,168,76,0.2); }
+    .book-inner { padding: 2rem 1.6rem 1.4rem 2.2rem; height: 100%; display: flex; flex-direction: column; }
+    .book-label {
+      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .book-chart {
+      flex: 1; display: flex; align-items: flex-end; gap: 3px; margin-bottom: 1.2rem;
+    }
+    .bar {
+      flex: 1; background: rgba(201,168,76,0.15);
+      border-top: 1px solid rgba(201,168,76,0.5);
+      transition: height 0.3s;
+    }
+    .book-title-cover {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 900; line-height: 1.1;
+      color: var(--paper); margin-bottom: 0.4rem;
+    }
+    .book-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; font-weight: 900; line-height: 1;
+      color: var(--gold); opacity: 0.25; margin-bottom: 0.6rem;
+    }
+    .book-author { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .glow-behind {
+      position: absolute;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* ── SECTION ── */
+    section { padding: 6rem 5rem; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700; color: var(--paper); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .divider { width: 48px; height: 2px; background: var(--gold); margin: 1.5rem 0 2.5rem; }
+
+    /* ── BENEFITS ── */
+    .benefits { background: var(--ink-soft); }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5px; margin-top: 3.5rem;
+      border: 1.5px solid rgba(201,168,76,0.12);
+    }
+    .benefit-card {
+      padding: 2.2rem 2rem;
+      background: var(--ink-soft);
+      border: 0.5px solid rgba(201,168,76,0.08);
+      transition: background 0.2s;
+    }
+    .benefit-card:hover { background: rgba(201,168,76,0.04); }
+    .benefit-icon {
+      font-size: 1.6rem; margin-bottom: 1rem; color: var(--gold);
+    }
+    .benefit-card h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.15rem;
+      margin-bottom: 0.7rem; color: var(--paper);
+    }
+    .benefit-card p { font-size: 0.9rem; color: var(--muted); font-weight: 300; }
+
+    /* ── CHAPTERS ── */
+    .chapters { background: var(--ink); }
+    .chapter-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 3rem; }
+    .chapter-item {
+      display: flex; align-items: flex-start; gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(247,244,238,0.06);
+    }
+    .chapter-item:nth-child(odd) { padding-right: 3rem; }
+    .chapter-item:nth-child(even) { padding-left: 3rem; border-left: 1px solid rgba(247,244,238,0.06); }
+    .chapter-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--gold);
+      min-width: 32px; opacity: 0.7;
+    }
+    .chapter-text h4 { font-size: 0.95rem; color: var(--paper); margin-bottom: 0.3rem; }
+    .chapter-text p { font-size: 0.8rem; color: var(--muted); font-weight: 300; }
+
+    /* ── CHART SECTION ── */
+    .chart-section { background: var(--ink-soft); overflow: hidden; }
+    .chart-container {
+      margin-top: 3rem; padding: 2rem;
+      background: var(--ink);
+      border: 1px solid rgba(201,168,76,0.12);
+      position: relative;
+    }
+    .chart-label-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.78rem; color: var(--muted); }
+    .candle-chart { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding: 0 0.5rem; }
+    .candle { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .candle-wick { width: 1px; background: rgba(201,168,76,0.4); }
+    .candle-body { width: 70%; min-height: 4px; }
+    .candle.up .candle-body { background: var(--gold); }
+    .candle.down .candle-body { background: rgba(201,168,76,0.25); }
+    .chart-line { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 1.5rem 0 0.5rem; opacity: 0.3; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--ink); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .testi-card {
+      padding: 1.8rem; background: var(--ink-soft);
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+    .testi-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.8rem; letter-spacing: 0.1em; }
+    .testi-text { font-size: 0.9rem; color: var(--paper); font-weight: 300; line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+    .testi-name { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+    .testi-role { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── PRICING ── */
+    .pricing {
+      background: var(--ink-soft);
+      text-align: center;
+    }
+    .pricing .section-title { text-align: center; }
+    .pricing .divider { margin-left: auto; margin-right: auto; }
+    .price-box {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 3rem 4rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      background: var(--ink);
+      position: relative;
+    }
+    .price-box::before {
+      content: 'OFERTA ESPECIAL';
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--ink);
+      font-size: 0.65rem; letter-spacing: 0.2em; padding: 0.3rem 1rem;
+      white-space: nowrap;
+    }
+    .price-old { font-size: 1.1rem; color: var(--muted); text-decoration: line-through; margin-bottom: 0.4rem; }
+    .price-new {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; font-weight: 900; color: var(--gold); line-height: 1;
+    }
+    .price-currency { font-size: 2rem; vertical-align: super; }
+    .price-sub { font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; }
+    .price-features { list-style: none; margin: 2rem 0 2.5rem; text-align: left; }
+    .price-features li {
+      padding: 0.55rem 0; border-bottom: 1px solid rgba(247,244,238,0.06);
+      font-size: 0.9rem; display: flex; align-items: center; gap: 0.7rem;
+    }
+    .price-features li::before { content: '✓'; color: var(--gold); font-weight: 700; }
+    .guarantee {
+      margin-top: 1.5rem; font-size: 0.8rem; color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1rem; letter-spacing: 0.1em; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; gap: 3rem; }
+      .hero-book { order: -1; }
+      nav { padding: 1rem 1.5rem; }
+      section { padding: 4rem 1.8rem; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .chapter-list { grid-template-columns: 1fr; }
+      .chapter-item:nth-child(odd), .chapter-item:nth-child(even) { padding: 1.2rem 0; border-left: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .price-box { padding: 2.5rem 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TP26</div>
+  <a href="#pricing" class="nav-cta">Comprar ahora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-text">
+    <div class="hero-badge">El manual definitivo del trader</div>
+    <h1>Trading<br/><span>Profesional</span><br/>26</h1>
+    <p class="hero-sub">Domina los mercados financieros con la metodología más completa y actualizada. Estrategias probadas, gestión de riesgo avanzada y psicología del trading.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">26</span>
+        <span class="stat-label">Capítulos</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">480+</span>
+        <span class="stat-label">Páginas</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">12K+</span>
+        <span class="stat-label">Lectores</span>
+      </div>
+    </div>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn-primary">Obtener el libro</a>
+      <a href="#contenido" class="btn-secondary">Ver contenido</a>
+    </div>
+  </div>
+
+  <div class="hero-book">
+    <div class="glow-behind"></div>
+    <div class="book-wrapper">
+      <div class="book-cover">
+        <div class="book-spine"></div>
+        <div class="book-inner">
+          <div class="book-label">Trading Profesional</div>
+          <div class="book-chart">
+            <div class="bar" style="height:45%"></div>
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:40%"></div>
+            <div class="bar" style="height:75%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:90%"></div>
+            <div class="bar" style="height:70%"></div>
+            <div class="bar" style="height:85%"></div>
+            <div class="bar" style="height:65%"></div>
+            <div class="bar" style="height:95%"></div>
+          </div>
+          <div class="book-title-cover">Trading<br/>Profesional</div>
+          <div class="book-num">26</div>
+          <div class="book-author">Edición Definitiva</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits reveal">
+  <div class="section-label">¿Por qué este libro?</div>
+  <div class="section-title">Todo lo que necesitas<br/>para operar como profesional</div>
+  <div class="divider"></div>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">📈</div>
+      <h3>Análisis técnico avanzado</h3>
+      <p>Patrones chartistas, indicadores clave, niveles de soporte y resistencia con ejemplos reales de mercado.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🛡️</div>
+      <h3>Gestión de riesgo</h3>
+      <p>Sistemas de control de pérdidas, dimensionado de posiciones y preservación del capital a largo plazo.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🧠</div>
+      <h3>Psicología del trader</h3>
+      <p>Supera los sesgos cognitivos, desarrolla disciplina y construye un plan de trading sostenible.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">⚡</div>
+      <h3>Estrategias operativas</h3>
+      <p>26 sistemas de trading testeados: scalping, swing trading, tendencias y reversiones a la media.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🌍</div>
+      <h3>Mercados globales</h3>
+      <p>Forex, acciones, futuros, criptomonedas e índices. Aplicable a cualquier mercado y timeframe.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📊</div>
+      <h3>Backtesting y datos</h3>
+      <p>Metodología para validar estrategias con datos históricos y métricas de rendimiento ajustadas al riesgo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section class="chapters reveal" id="contenido">
+  <div class="section-label">Contenido del libro</div>
+  <div class="section-title">26 capítulos que transforman<br/>tu forma de operar</div>
+  <div class="divider"></div>
+  <div class="chapter-list">
+    <div class="chapter-item"><span class="chapter-num">01</span><div class="chapter-text"><h4>Fundamentos del mercado</h4><p>Estructura, participantes y microestructura</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">14</span><div class="chapter-text"><h4>Gestión del capital</h4><p>Kelly, fixed ratio y métodos avanzados</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">02</span><div class="chapter-text"><h4>Lectura del precio</h4><p>Price action, velas y volumen real</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">15</span><div class="chapter-text"><h4>Trading algorítmico</h4><p>Automatización y señales sistemáticas</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">03</span><div class="chapter-text"><h4>Estructura del mercado</h4><p>Soportes dinámicos y zonas clave</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">16</span><div class="chapter-text"><h4>Gestión de operaciones</h4><p>Entradas, trailing stops y salidas parciales</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">04</span><div class="chapter-text"><h4>Tendencias y rango</h4><p>Identificación y explotación de fases</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">17</span><div class="chapter-text"><h4>Correlaciones</h4><p>Activos correlacionados y diversificación</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">05</span><div class="chapter-text"><h4>Indicadores técnicos</h4><p>Medias móviles, RSI, MACD, Bandas Bollinger</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">18</span><div class="chapter-text"><h4>Volatilidad</h4><p>VIX, ATR y estrategias en entornos volátiles</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">06</span><div class="chapter-text"><h4>Patrones chartistas</h4><p>Cabeza y hombros, triángulos, cuñas y más</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">19</span><div class="chapter-text"><h4>Análisis fundamental</h4><p>Macro, earnings y eventos de mercado</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">07</span><div class="chapter-text"><h4>Velas japonesas</h4><p>Los 30 patrones más rentables</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">20</span><div class="chapter-text"><h4>Order flow</h4><p>DOM, cinta y flujo de órdenes institucional</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">08</span><div class="chapter-text"><h4>Fibonacci y Gann</h4><p>Retrocesos, extensiones y niveles clave</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">21</span><div class="chapter-text"><h4>Psicología profunda</h4><p>Sesgos, emociones y toma de decisiones</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">09</span><div class="chapter-text"><h4>Scalping profesional</h4><p>Técnicas de trading intradía de alta frecuencia</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">22</span><div class="chapter-text"><h4>Plan de trading</h4><p>Diseño, ejecución y revisión sistemática</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">10</span><div class="chapter-text"><h4>Swing trading</h4><p>Captura de movimientos de días a semanas</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">23</span><div class="chapter-text"><h4>Diario del trader</h4><p>Registro, análisis y mejora continua</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">11</span><div class="chapter-text"><h4>Trading de posición</h4><p>Estrategias de medio y largo plazo</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">24</span><div class="chapter-text"><h4>Prop trading</h4><p>Cómo acceder a capital externo y escalar</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">12</span><div class="chapter-text"><h4>Smart Money Concepts</h4><p>Liquidez, imbalances y bloques de órdenes</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">25</span><div class="chapter-text"><h4>Cripto y DeFi</h4><p>Análisis y operativa en mercados digitales</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">13</span><div class="chapter-text"><h4>Gestión del riesgo</h4><p>Stop loss, ratio R:R y drawdown máximo</p></div></div>
+    <div class="chapter-item"><span class="chapter-num">26</span><div class="chapter-text"><h4>El trader consistente</h4><p>Hábitos, rutinas y mentalidad ganadora</p></div></div>
+  </div>
+</section>
+
+<!-- CHART SECTION -->
+<section class="chart-section reveal">
+  <div class="section-label">Resultados reales</div>
+  <div class="section-title">Metodología basada<br/>en datos y evidencia</div>
+  <div class="divider"></div>
+  <p style="color:var(--muted); font-size:0.92rem; max-width:520px; font-weight:300;">Las estrategias del libro han sido validadas con datos históricos de más de 10 años en múltiples mercados y condiciones.</p>
+  <div class="chart-container">
+    <div class="chart-label-row"><span>Rendimiento de ejemplo — Sistema tendencial EUR/USD 2020–2024</span><span style="color:var(--gold)">+347%</span></div>
+    <div class="candle-chart" id="candleChart"></div>
+    <div class="chart-line"></div>
+    <div style="display:flex; gap:2rem; font-size:0.75rem; color:var(--muted);">
+      <span>✓ Backtested 2014–2024</span>
+      <span>✓ Out-of-sample validado</span>
+      <span>✓ Ratio Sharpe &gt; 1.8</span>
+      <span>✓ Max DD &lt; 18%</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials reveal">
+  <div class="section-label">Lo que dicen los lectores</div>
+  <div class="section-title">Miles de traders<br/>han transformado sus resultados</div>
+  <div class="divider"></div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"El capítulo de gestión del riesgo solo ya vale el precio del libro. Cambió completamente mi forma de afrontar las operaciones."</p>
+      <div class="testi-name">Carlos M.</div>
+      <div class="testi-role">Trader independiente, Madrid</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Llevaba años operando sin un sistema claro. Con los 26 capítulos construí mi plan desde cero y en 6 meses alcancé consistencia real."</p>
+      <div class="testi-name">Lucía R.</div>
+      <div class="testi-role">Ex-analista financiera, Barcelona</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"La parte de psicología es brillante. Por fin entendí por qué sabotéaba mis propias operaciones y cómo solucionarlo."</p>
+      <div class="testi-name">Andrés V.</div>
+      <div class="testi-role">Trader en prop firm, México</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing reveal" id="pricing">
+  <div class="section-label">Inversión</div>
+  <div class="section-title">Un precio justo por<br/>conocimiento que cambia resultados</div>
+  <div class="divider"></div>
+  <div class="price-box">
+    <p class="price-old">Precio habitual: 79,00 €</p>
+    <div class="price-new"><span class="price-currency">€</span>47</div>
+    <p class="price-sub">Pago único · Acceso inmediato · PDF + ePub</p>
+    <ul class="price-features">
+      <li>Libro completo en PDF y ePub (480+ páginas)</li>
+      <li>26 fichas de estrategia descargables</li>
+      <li>Plantilla de diario del trader en Excel</li>
+      <li>Calculadora de gestión de riesgo</li>
+      <li>Acceso a actualizaciones futuras</li>
+      <li>Garantía de devolución 30 días</li>
+    </ul>
+    <a href="https://buy.stripe.com/cNi6oH8QngB7c3tbiNbZe0c" target="_blank" rel="noopener" class="btn-primary" style="display:block; text-align:center; font-size:1rem; padding:1.1rem 2rem;">
+      Comprar ahora — 47 €
+    </a>
+    <p class="guarantee">🔒 Pago seguro · Garantía 30 días sin preguntas</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Trading Profesional 26</div>
+  <div>© 2025 Trading Profesional 26 · Todos los derechos reservados</div>
+  <div>ventas@tradingprofesional26.com</div>
+</footer>
+
+<script>
+  // Candle chart
+  const chart = document.getElementById('candleChart');
+  const candles = [
+    {h:80,b:30,o:45,c:60,up:true},{h:90,b:25,o:55,c:75,up:true},
+    {h:75,b:20,o:70,c:55,up:false},{h:85,b:35,o:50,c:80,up:true},
+    {h:70,b:15,o:65,c:55,up:false},{h:95,b:40,o:55,c:90,up:true},
+    {h:88,b:30,o:80,c:65,up:false},{h:100,b:45,o:60,c:100,up:true},
+    {h:95,b:25,o:90,c:70,up:false},{h:110,b:50,o:65,c:110,up:true},
+    {h:105,b:30,o:100,c:80,up:false},{h:120,b:55,o:75,c:120,up:true},
+    {h:115,b:35,o:110,c:85,up:false},{h:135,b:60,o:85,c:135,up:true},
+  ];
+  const maxH = 135;
+  candles.forEach(c => {
+    const el = document.createElement('div');
+    el.className = `candle ${c.up ? 'up' : 'down'}`;
+    const wickH = (c.h / maxH) * 100;
+    const bodyH = (c.b / maxH) * 100;
+    el.innerHTML = `<div class="candle-wick" style="height:${wickH}%"></div><div class="candle-body" style="height:${bodyH}%"></div>`;
+    chart.appendChild(el);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
